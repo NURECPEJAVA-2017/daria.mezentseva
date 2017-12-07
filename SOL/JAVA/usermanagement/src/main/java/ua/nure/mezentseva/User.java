@@ -98,12 +98,13 @@ public class User {
 
 	public int getAge() {
 		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
 
 		int curday = calendar.get(Calendar.DAY_OF_MONTH);
 		int curmonth = calendar.get(Calendar.MONTH);
 		int curyear = calendar.get(Calendar.YEAR);
 
-		calendar.setTime(getDateOfBirth());
+		calendar.setTime(dateOfBirth);
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
 		int month = calendar.get(Calendar.MONTH);
 		int year = calendar.get(Calendar.YEAR);
@@ -112,12 +113,15 @@ public class User {
 
 		if (curmonth >= month) {
 			if (curday >= day) {
-				result = curyear - year -1 ;
-				
+				result = curyear - year;
+			  	return result;
+			}
+			else {
+				result = curyear - year-1 ;
 			}
 		}
 		else{
-			result = curyear - year ;
+			result = curyear - year-1 ;
 		}
 		return result;
 		
