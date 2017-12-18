@@ -9,6 +9,17 @@ public class User {
 	private String lastName;
 	private Date dateOfBirth;
 
+	public User(User user) {
+		id = user.getId();
+		firstName = user.getFirstName();
+		lastName = user.getLastName();
+		dateOfBirth = user.getDateOfBirth();
+	}
+	
+	public User(){
+		
+	}
+
 	public Long getId() {
 		return id;
 	}

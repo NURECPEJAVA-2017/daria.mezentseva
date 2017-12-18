@@ -17,7 +17,7 @@ public class HsqldbUserDAOTest extends DatabaseTestCase {
 	
 	
 	protected void setUp() throws Exception {
-		super.setUp();
+		//super.setUp();
 		dao = new HsqldbUserDAO(connectionFactory);
 	}
 	
