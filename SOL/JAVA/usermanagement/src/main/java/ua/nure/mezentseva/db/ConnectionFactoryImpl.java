@@ -18,6 +18,13 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
 		password = properties.getProperty("connection.password");
 	}
 
+	public ConnectionFactoryImpl(String driver, String url, String user, String password) {
+		this.driver = driver;
+		this.url = url;
+		this.user = user;
+		this.password = password;
+	}
+
 	public Connection createConnection() throws DatabaseException {
 		
 		String driver = "org.hsqldb.jdbcDriver";

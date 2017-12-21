@@ -8,6 +8,7 @@ import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.XmlDataSet;
+import org.junit.Test;
 
 import ua.nure.mezentseva.User;
 
@@ -17,12 +18,12 @@ public class HsqldbUserDAOTest extends DatabaseTestCase {
 	
 	
 	protected void setUp() throws Exception {
-		//super.setUp();
+		super.setUp();
 		dao = new HsqldbUserDAO(connectionFactory);
 	}
 	
 	
-	//@Test
+	@Test
 	public void testCreate(){
 		User user = new User();
 		user.setFirstName("Dasha");
@@ -41,6 +42,47 @@ public class HsqldbUserDAOTest extends DatabaseTestCase {
 		
 	}
 	
+	@Test
+	public void testDelete(){
+		User user = new User();
+		user.setId(1L);
+
+		assertNull(user.getId());
+		try {
+			user = dao.delete(user);
+		} catch (DatabaseException e) {
+			
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+		
+		assertNotNull(user);
+		assertNotNull(user.getId());
+		
+	}
+	
+	
+	@Test
+	public void testUpdate(){
+		User user = new User();
+		user.setFirstName("Dasha");
+		user.setLastName("Mezentseva");
+		user.setDateOfBirth(new Date());
+		assertNull(user.getId());
+		try {
+			user = dao.update(user);
+		} catch (DatabaseException e) {
+			
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+		assertNotNull(user);
+		assertNotNull(user.getId());
+		
+	}
+	
+	
+	@Test
 	public void testFindAll(){
 		try {
 			Collection<User> collection = dao.findAll();
@@ -57,7 +99,11 @@ public class HsqldbUserDAOTest extends DatabaseTestCase {
 
 	@Override
 	protected IDatabaseConnection getConnection() throws Exception {
-		connectionFactory = new ConnectionFactoryImpl();
+		connectionFactory = new ConnectionFactoryImpl(
+				"org.hsqldb.jdbcDriver",
+				"jdbc:hsqldb:file:db/usermanagement",
+				"sa",
+				"");
 		return new DatabaseConnection(connectionFactory.createConnection());
 	}
 

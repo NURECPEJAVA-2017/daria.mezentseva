@@ -8,9 +8,9 @@ import ua.nure.mezentseva.User;
 public interface UserDAO {
 	User create(User t) throws DatabaseException;
 	
-	void delete(User t) throws DatabaseException;
+	User delete(User t) throws DatabaseException;
 	
-	void update(User t) throws DatabaseException;
+	User update(User t) throws DatabaseException;
 	
 	Collection<User> findAll() throws DatabaseException;
 	
