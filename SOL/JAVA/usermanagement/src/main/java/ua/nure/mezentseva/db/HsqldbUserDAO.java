@@ -66,9 +66,9 @@ class HsqldbUserDAO implements UserDAO {
 
 	}
 
-	public User delete(User user) throws DatabaseException {
+	public void delete(User user) throws DatabaseException {
 		try {
-			User resultUser = new User(user);
+			//User resultUser = new User(user);
 			Connection connection = connectionFactory.createConnection();
 			PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
 			statement.setLong(1, user.getId());
@@ -78,7 +78,7 @@ class HsqldbUserDAO implements UserDAO {
 			}
 			statement.close();
 			connection.close();
-			return resultUser;
+			//return resultUser;
 
 		} catch (SQLException e) {
 			throw new DatabaseException(e);
@@ -86,14 +86,15 @@ class HsqldbUserDAO implements UserDAO {
 
 	}
 
-	public User update(User user) throws DatabaseException {
+	public void update(User user) throws DatabaseException {
 		try {
-			User resultUser = new User(user);
+			//User resultUser = new User(user);
 			Connection connection = connectionFactory.createConnection();
 			PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
-			// statement.setString( 1, user.getFirstName());
-			// statement.setString(2, user.getLastName());
-			// statement.setDate(3, new Date (user.getDateOfBirth().getTime()));
+			statement.setString( 1, user.getFirstName());
+			statement.setString(2, user.getLastName());
+			statement.setDate(3, new Date (user.getDateOfBirth().getTime()));
+			statement.setLong(4, user.getId());
 			int n = statement.executeUpdate();
 			if (n != 1) {
 				throw new DatabaseException("Number of the updated rows:" + n);
@@ -101,14 +102,14 @@ class HsqldbUserDAO implements UserDAO {
 
 			statement.close();
 			connection.close();
-			return resultUser;
+			//return resultUser;
 
 		} catch (SQLException e) {
 			throw new DatabaseException(e);
 		}
 
 	}
-
+	
 	public Collection<User> findAll() throws DatabaseException {
 
 		Collection<User> result = new LinkedList<User>();
