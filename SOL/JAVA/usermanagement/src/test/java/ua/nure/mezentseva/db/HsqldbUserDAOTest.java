@@ -46,18 +46,22 @@ public class HsqldbUserDAOTest extends DatabaseTestCase {
 	public void testDelete(){
 		User user = new User();
 		user.setId(1L);
+		user.setFirstName("Dasha");
+		user.setLastName("Mezentseva");
+		user.setDateOfBirth(new Date());
 
 		assertNull(user.getId());
 		try {
-			user = dao.delete(user);
+			dao.delete(user);
 		} catch (DatabaseException e) {
 			
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
 		
-		assertNotNull(user);
-		assertNotNull(user.getId());
+		//assertNotNull(user);
+		//assertNotNull(user.getId());
+		assertNull(user);
 		
 	}
 	
@@ -70,7 +74,7 @@ public class HsqldbUserDAOTest extends DatabaseTestCase {
 		user.setDateOfBirth(new Date());
 		assertNull(user.getId());
 		try {
-			user = dao.update(user);
+			dao.update(user);
 		} catch (DatabaseException e) {
 			
 			e.printStackTrace();

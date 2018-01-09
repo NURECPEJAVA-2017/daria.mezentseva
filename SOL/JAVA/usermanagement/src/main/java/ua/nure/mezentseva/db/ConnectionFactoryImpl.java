@@ -25,28 +25,17 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
 		this.password = password;
 	}
 
-	public Connection createConnection() throws DatabaseException {
-		
-		String driver = "org.hsqldb.jdbcDriver";
-		String url = "jdbc:hsqldb:file:db/usermanagement";
-		String user = "sa";
-		String password = "";
-		
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			
-			throw new RuntimeException();
-			
-		}
-		
-		try {
-			return DriverManager.getConnection(url, user, password);
-		} catch (SQLException e) {
-			
-			throw new DatabaseException();
-		}
-		
-	}
-
+    public Connection createConnection() throws DatabaseException {
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        
+        try {
+            return DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
+        }
+    }
 }

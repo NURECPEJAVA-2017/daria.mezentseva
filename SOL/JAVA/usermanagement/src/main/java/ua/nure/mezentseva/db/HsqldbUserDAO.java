@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 import ua.nure.mezentseva.User;
 
-class HsqldbUserDAO implements UserDAO {
+class HsqldbUserDAO implements Dao<User> {
 
 	private static final String SELECT_QUERY = "SELECT id, firstname, lastname, dateofbirth FROM users";
 	private static final String INSERT_QUERY = "INSERT INTO users (firstname, lastname, dateOfBirth) VALUES (?, ?, ?)";
