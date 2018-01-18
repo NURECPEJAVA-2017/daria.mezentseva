@@ -34,7 +34,7 @@ public class User {
 		dateOfBirth = user.getDateOfBirth();
 	}
 	
-	public User(){
+	public User(Long l, String string, String string2, Date date){
 		
 	}
 
