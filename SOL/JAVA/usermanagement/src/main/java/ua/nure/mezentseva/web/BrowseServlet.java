@@ -50,8 +50,7 @@ public class BrowseServlet extends HttpServlet {
 		
 	}
 
-	private void delete(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
+	private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 	}
 
